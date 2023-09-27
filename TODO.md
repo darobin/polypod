@@ -1,8 +1,8 @@
 
 - [ ] Tests
 - [ ] Implement POSIXy bits
-  - [ ] mkdir
-  - [ ] save (stores data)
+  - [x] mkdir
+  - [x] save (stores data)
   - [ ] ls
   - [ ] cat
   - [ ] rm
