@@ -1,0 +1,11 @@
+
+- [ ] Tests
+- [ ] Implement POSIXy bits
+  - [ ] mkdir
+  - [ ] save (stores data)
+  - [ ] ls
+  - [ ] cat
+  - [ ] rm
+  - [ ] mv
+  - [ ] get
+  - [ ] exists
