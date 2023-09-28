@@ -5,7 +5,9 @@
   "description": "Experimenting with Polypod atop WNFS",
   "author": "Robin Berjon <robin@berjon.com>",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha"
+  },
   "bin": {},
   "repository": {
     "type": "git",

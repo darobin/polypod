@@ -9,8 +9,8 @@ const s = Store.createFromCID(
 );
 await s.mkdir(['robin', 'pics']);
 const wtf = await readFile('/Users/robin/Code/darobin/polypod-wnfs/scratch/wtf.jpg');
-await s.save(['robin', 'pics', 'wtf.jpg'], wtf);
-const cid = await s.put();
+await s.writeFile(['robin', 'pics', 'wtf.jpg'], wtf);
+const cid = await s.commit();
 console.warn(`Done again: ${cid.toString()}!`);
 // console.warn(`Done!`);
 
