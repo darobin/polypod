@@ -1,11 +1,11 @@
 
-- [ ] Tests
+- [x] Tests
 - [ ] Implement POSIXy bits
   - [x] mkdir
   - [x] save (stores data)
-  - [ ] ls
-  - [ ] cat
+  - [ ] ls/readdir
+  - [ ] cat/readFile
   - [ ] rm
   - [ ] mv
-  - [ ] get
-  - [ ] exists
+  - [ ] get?
+  - [x] exists
