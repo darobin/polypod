@@ -49,4 +49,26 @@ describe('WNFS', async () => {
     await s.commit();
     ok(!await s.exists(fn), 'file no longer exists');
   });
+  it('can move files', async () => {
+    const fn = '/test/mv/poem.txt';
+    const fn2 = fn.replace('poem', 'villanelle');
+    const dir1 = fn.replace('/poem.txt', '');
+    const dir2 = dir1.replace('mv', 'other');
+    const fn3 = fn2.replace('mv', 'other');
+    const s = Store.createEmpty(storeDir);
+    await s.mkdir(dirname(fn));
+    await s.writeFile(fn, poem);
+    await s.commit();
+    ok(await s.exists(fn), 'file exists');
+    await s.mv(fn, fn2);
+    await s.commit();
+    ok(!await s.exists(fn), 'file 1 no longer exists');
+    ok(await s.exists(fn2), 'file 2 exists');
+    await s.mv(dir1, dir2);
+    await s.commit();
+    ok(!await s.exists(dir1), 'dir 1 no longer exists');
+    ok(!await s.exists(fn2), 'file 2 no longer exists (dir moved)');
+    ok(await s.exists(dir2), 'dir 2 exists');
+    ok(await s.exists(fn3), 'file 3 exists (dir moved)');
+  });
 });

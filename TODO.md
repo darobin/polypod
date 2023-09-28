@@ -3,9 +3,9 @@
 - [ ] Implement POSIXy bits
   - [x] mkdir
   - [x] save (stores data)
-  - [ ] ls/readdir
   - [x] cat/readFile
   - [x] rm
-  - [ ] mv
+  - [x] mv
+  - [ ] ls/readdir
   - [ ] get? (metadata)
   - [x] exists
