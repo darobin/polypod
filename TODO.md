@@ -5,7 +5,7 @@
   - [x] save (stores data)
   - [ ] ls/readdir
   - [x] cat/readFile
-  - [ ] rm
+  - [x] rm
   - [ ] mv
   - [ ] get? (metadata)
   - [x] exists

@@ -38,4 +38,15 @@ describe('WNFS', async () => {
     await s.commit();
     equal(await s.readFile(fn, 'utf-8'), poem, 'the poem came out right');
   });
+  it('can delete files', async () => {
+    const fn = '/test/rm/poem.txt';
+    const s = Store.createEmpty(storeDir);
+    await s.mkdir(dirname(fn));
+    await s.writeFile(fn, poem);
+    await s.commit();
+    ok(await s.exists(fn), 'file exists');
+    await s.rm(fn);
+    await s.commit();
+    ok(!await s.exists(fn), 'file no longer exists');
+  });
 });
