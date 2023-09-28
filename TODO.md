@@ -4,8 +4,8 @@
   - [x] mkdir
   - [x] save (stores data)
   - [ ] ls/readdir
-  - [ ] cat/readFile
+  - [x] cat/readFile
   - [ ] rm
   - [ ] mv
-  - [ ] get?
+  - [ ] get? (metadata)
   - [x] exists

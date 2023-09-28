@@ -30,4 +30,12 @@ describe('WNFS', async () => {
     ok(await s.exists(fn), 'file exists');
     ok(!await s.exists(fn + '.md'), 'non existent file does not exist');
   });
+  it('can read files', async () => {
+    const fn = '/test/reading/poem.txt';
+    const s = Store.createEmpty(storeDir);
+    await s.mkdir(dirname(fn));
+    await s.writeFile(fn, poem);
+    await s.commit();
+    equal(await s.readFile(fn, 'utf-8'), poem, 'the poem came out right');
+  });
 });
