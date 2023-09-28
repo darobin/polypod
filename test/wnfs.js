@@ -21,9 +21,3 @@ describe('WNFS', async () => {
     equal(cnt, poem, 'the poem came out right');
   });
 });
-
-// const s = Store.createEmpty('/Users/robin/Code/darobin/polypod-wnfs/scratch/cid-store');
-// await s.mkdir(['robin', 'notes']);
-// await s.writeFile(['robin', 'notes', 'poem.txt'], 'time will say nothing but I told you so');
-// const cid = await s.commit();
-// console.warn(`Done: ${cid.toString()}!`);
