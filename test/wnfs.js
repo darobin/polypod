@@ -71,4 +71,40 @@ describe('WNFS', async () => {
     ok(await s.exists(dir2), 'dir 2 exists');
     ok(await s.exists(fn3), 'file 3 exists (dir moved)');
   });
+  it('can list files', async () => {
+    const dir = '/test/ls';
+    const files = ['one', 'two', 'three', 'four'];
+    const dirs = ['aaa', 'ggg', 'zzz'];
+    const all = [].concat(files).concat(dirs).sort();
+    const s = Store.createEmpty(storeDir);
+    await s.mkdir(dir);
+    await Promise.all(files.map(n => s.writeFile(join(dir, n), poem)));
+    await Promise.all(dirs.map(n => s.mkdir(join(dir, n))));
+    for (const d of dirs) {
+      await s.mkdir(join(dir, d));
+    }
+    await s.commit();
+    const list = await s.ls(dir);
+    equal(list.length, 7, 'all entries listed');
+    list.forEach(({ name }, idx) => equal(name, all[idx], `entry ${idx} is correct`));
+    const lsFile = list[1]; // four
+    const lsDir = list[0]; // aaa
+    ok(lsFile.isFile(), 'files are files');
+    ok(!lsFile.isDirectory(), 'files are not directories');
+    ok(lsDir.isDirectory(), 'directories are directories');
+    ok(!lsDir.isFile(), 'directories are not files');
+  });
+  // it('supports file metdata', async () => {
+  //   const fn = '/test/reading/poem.txt';
+  //   const s = Store.createEmpty(storeDir);
+  //   await s.mkdir(dirname(fn));
+  //   await s.writeFile(fn, poem);
+  //   await s.commit();
+  //   const meta = s.readFileMetadata(fn);
+  //   // XXX
+  //   //  - test on directories
+  //   //  - set metadata
+  //   //  - special-case media type
+  //   //  - add meta to writeFile?
+  // });
 });

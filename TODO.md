@@ -6,6 +6,7 @@
   - [x] cat/readFile
   - [x] rm
   - [x] mv
-  - [ ] ls/readdir
+  - [x] ls/readdir
   - [ ] get? (metadata)
   - [x] exists
+- [ ]
