@@ -1,12 +1,12 @@
 
 - [x] Tests
-- [ ] Implement POSIXy bits
+- [x] Implement POSIXy bits
   - [x] mkdir
   - [x] save (stores data)
   - [x] cat/readFile
   - [x] rm
   - [x] mv
   - [x] ls/readdir
-  - [ ] get? (metadata)
+  - [x] get? (metadata)
   - [x] exists
-- [ ]
+- [ ] go through API endpoints and implement one by one in simplest way

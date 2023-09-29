@@ -94,17 +94,17 @@ describe('WNFS', async () => {
     ok(lsDir.isDirectory(), 'directories are directories');
     ok(!lsDir.isFile(), 'directories are not files');
   });
-  // it('supports file metdata', async () => {
-  //   const fn = '/test/reading/poem.txt';
-  //   const s = Store.createEmpty(storeDir);
-  //   await s.mkdir(dirname(fn));
-  //   await s.writeFile(fn, poem);
-  //   await s.commit();
-  //   const meta = s.readFileMetadata(fn);
-  //   // XXX
-  //   //  - test on directories
-  //   //  - set metadata
-  //   //  - special-case media type
-  //   //  - add meta to writeFile?
-  // });
+  it('supports file metdata', async () => {
+    const fn = '/test/meta/poem.txt';
+    const date = new Date();
+    // this gets the right kind of integer to match how wnfs does seconds
+    const timestamp = Math.floor((date.getTime() / 1000)).toString();
+    const s = Store.createEmpty(storeDir);
+    await s.mkdir(dirname(fn));
+    await s.writeFile(fn, poem);
+    await s.commit();
+    const meta = await s.readFileMetadata(fn);
+    equal(`${meta.created}`, timestamp, `created correct`);
+    equal(`${meta.modified}`, timestamp, `modified correct`);
+  });
 });
