@@ -10,3 +10,6 @@
   - [x] get? (metadata)
   - [x] exists
 - [ ] go through API endpoints and implement one by one in simplest way
+  - [ ] make client scripts that access the API and run them until they work
+  - [ ] local PLC server
+  - [ ] XRPC server to serve as PDS
