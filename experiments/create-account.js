@@ -1,7 +1,8 @@
 
-import { BskyAgent } from '@atproto/api';
+import API from '@atproto/api';
 import { pdsURL, accounts } from './data.js';
 
+const { BskyAgent } = API;
 const agent = new BskyAgent({ service: pdsURL });
 
 // create a new account on the server
