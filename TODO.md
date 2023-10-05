@@ -9,7 +9,7 @@
   - [x] ls/readdir
   - [x] get? (metadata)
   - [x] exists
-- [ ] make a context object that's widely available to work from
+- [x] make a context object that's widely available to work from
 - [ ] make a DID service that just fakes it locally
 - [ ] make it take a config that's basically a storage directory
 - [ ] go through API endpoints and implement one by one in simplest way
