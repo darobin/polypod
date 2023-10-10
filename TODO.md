@@ -13,7 +13,8 @@
 - [ ] make a DID service that just fakes it locally
 - [ ] make it take a config that's basically a storage directory
 - [ ] go through API endpoints and implement one by one in simplest way
-  - [ ] make client scripts that access the API and run them until they work
+  - [x] make client scripts that access the API and run them until they work
   - [ ] local PLC server
-  - [ ] XRPC server to serve as PDS
+  - [x] XRPC server to serve as PDS
+  - [x] com.atproto.server.createInviteCode
   - [ ] com.atproto.server.createAccount
