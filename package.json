@@ -36,6 +36,8 @@
     "pino-pretty": "^10.2.3"
   },
   "dependencies": {
+    "@atproto/identity": "^0.2.1",
+    "@atproto/syntax": "^0.1.2",
     "@atproto/xrpc-server": "^0.3.2",
     "basic-auth": "^2.0.1",
     "blake3-multihash": "^0.0.4",

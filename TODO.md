@@ -15,6 +15,9 @@
 - [ ] go through API endpoints and implement one by one in simplest way
   - [x] make client scripts that access the API and run them until they work
   - [ ] local PLC server
+  - [ ] Move Lexicons out of the submodule (with a tool) so they can be shipped
   - [x] XRPC server to serve as PDS
-  - [x] com.atproto.server.createInviteCode
-  - [ ] com.atproto.server.createAccount
+  - [x] com.atproto. (don't do all, do just what we need to get something working on top)
+    - [ ] server.
+      - [ ] createInviteCode
+      - [ ] createAccount
