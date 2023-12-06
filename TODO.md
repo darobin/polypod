@@ -1,7 +1,7 @@
 
 - [x] make a context object that's widely available to work from
-- [ ] rename
-- [ ] udpate README
+- [x] rename
+- [x] udpate README
 - [ ] move to another DB
 - [ ] require baseDir, adminPwd, simple entry point
 - [ ] testing facility that starts with a baseDir, etc.
