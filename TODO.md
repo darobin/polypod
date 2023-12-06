@@ -1,15 +1,11 @@
 
-- [x] Tests
-- [x] Implement POSIXy bits
-  - [x] mkdir
-  - [x] save (stores data)
-  - [x] cat/readFile
-  - [x] rm
-  - [x] mv
-  - [x] ls/readdir
-  - [x] get? (metadata)
-  - [x] exists
 - [x] make a context object that's widely available to work from
+- [ ] rename
+- [ ] udpate README
+- [ ] move to another DB
+- [ ] require baseDir, adminPwd, simple entry point
+- [ ] testing facility that starts with a baseDir, etc.
+- [ ] abstract repo system
 - [ ] make a DID service that just fakes it locally
 - [ ] make it take a config that's basically a storage directory
 - [ ] go through API endpoints and implement one by one in simplest way
@@ -20,4 +16,8 @@
   - [x] com.atproto. (don't do all, do just what we need to get something working on top)
     - [ ] server.
       - [ ] createInviteCode
+        - [ ] tests
+        - [ ] implementation
       - [ ] createAccount
+        - [ ] tests
+        - [ ] implementation
