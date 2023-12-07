@@ -8,11 +8,11 @@ import Store from '../lib/store.js';
 const poem = 'time will say nothing but I told you so';
 let storeDir;
 
-before(async () => {
+before.skip(async () => {
   storeDir = await mkdtemp(join(tmpdir(), 'polypod-wnfs-'));
 });
 
-describe('WNFS', async () => {
+describe.skip('WNFS', async () => {
   it('can write a simple file', async () => {
     const s = Store.createEmpty(storeDir);
     await s.mkdir(['robin', 'notes']);

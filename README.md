@@ -25,6 +25,8 @@ The thesis is that we need a system that:
 My current approach is to build an ATProto PDS that is optimised for ease of experimentation.
 The theory is that an ATProto PDS + extensible WASM for protocols + built-in support for
 Web Tiles + a no-codeish way for people to build their own local IFTTT would be pretty sweet.
+On top of that, an IPFS pinning service (gated by auth) would be wonderful: it would open up
+all the projects for which the first question is "where do I store stuff?"
 
 NOTE: There's quite a fair bit of stuff in here lifted more or less straight from bluesky-social/atproto,
 notably from @atproto/pds. I would simply reuse but that code is set up to prevent importing (I presume

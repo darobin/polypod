@@ -2,8 +2,8 @@
 - [x] make a context object that's widely available to work from
 - [x] rename
 - [x] udpate README
-- [ ] move to another DB
-- [ ] require baseDir, adminPwd, simple entry point
+- [x] move to another DB
+- [x] require baseDir, adminPwd, simple entry point
 - [ ] testing facility that starts with a baseDir, etc.
 - [ ] abstract repo system
 - [ ] make a DID service that just fakes it locally
