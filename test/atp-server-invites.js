@@ -2,7 +2,10 @@
 import { match } from 'node:assert';
 import { createPDS, killPDS, agent, adminAuth } from './support/test-pds.js';
 
-before(async () => await createPDS());
+before(async function () {
+  // this.timeout(20_000);
+  await createPDS();
+});
 after(async () => await killPDS());
 
 describe('com.atproto.server.createInviteCode', async () => {
@@ -10,6 +13,7 @@ describe('com.atproto.server.createInviteCode', async () => {
     const code = await createInviteCode(1, 'did:test:1');
     console.warn(`code=${code}`);
     match(code, /^polypod-.+/);
+    console.warn(`DONE WITH TEST`);
   });
 });
 

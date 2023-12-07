@@ -8,7 +8,7 @@ import Store from '../lib/store.js';
 const poem = 'time will say nothing but I told you so';
 let storeDir;
 
-before.skip(async () => {
+before(async () => {
   storeDir = await mkdtemp(join(tmpdir(), 'polypod-wnfs-'));
 });
 

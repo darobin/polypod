@@ -2,11 +2,14 @@
 import { join } from 'node:path';
 import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import AtpAgent from '@atproto/api';
+import API from '@atproto/api';
 import { nanoid } from 'nanoid';
 import getPort from 'get-port';
 import * as ui8 from 'uint8arrays';
 import PDS from '../../lib/pds.js';
+
+const { AtpAgent } = API;
+let pds;
 
 export const adminPassword = nanoid();
 export const pdsPort = await getPort();
@@ -15,7 +18,7 @@ export const agent = new AtpAgent({ service: serverURL });
 
 export async function createPDS () {
   const storeDir = await mkdtemp(join(tmpdir(), 'polypod-test-'));
-  const pds = await PDS.create({
+  pds = await PDS.create({
     storeDir,
     adminPassword,
     port: pdsPort,
@@ -23,8 +26,8 @@ export async function createPDS () {
   await pds.start();
 }
 
-export async function killPDS (pds) {
-  await pds.destroy();
+export async function killPDS () {
+  if (pds) await pds.destroy();
 }
 
 export function basicAuth (username, password) {
