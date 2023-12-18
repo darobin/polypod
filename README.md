@@ -39,6 +39,7 @@ It is an experiment. If you run it in production or with any expectation of safe
 you will get hurt. It would be stupid, and on you.
 
 ```
+git submodule update --init
 npm install
 POLYPOD_ADMIN_PASSWORD=hunter2 ./pds-server.js --store-dir /some/directory/it/can/clobber
 ```
