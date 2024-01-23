@@ -1,4 +1,9 @@
 
+- reboot
+  - [ ] read code in picopds
+  - [ ] start from that, get those basics working and testing, then add what's missing
+
+
 - [x] make a context object that's widely available to work from
 - [x] rename
 - [x] udpate README
