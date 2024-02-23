@@ -10,7 +10,9 @@
     "watch": "concurrently npm:watch-pds",
     "watch-pds": "node --watch pds-server.js | pino-pretty -L error"
   },
-  "bin": {},
+  "bin": {
+    "polypod": "./bin.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/darobin/polypod-wnfs.git"
