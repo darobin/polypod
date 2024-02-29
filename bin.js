@@ -7,21 +7,10 @@ import { program } from 'commander';
 import makeRel from './lib/rel.js';
 import loadJSON from './lib/load-json.js';
 import saveJSON from './lib/save-json.js';
+import { configurationKeys, findErrorsInKey } from "./lib/config.js";
 
 const rel = makeRel(import.meta.url);
 const { version } = await loadJSON(rel('./package.json'));
-
-// XXX use this as list of values and also to validate
-// actually move this to a lib for reuse
-const validConfig = {
-  jwtSecret: () => true,
-  didPLC: () => true,
-  appViewDomain: () => true,
-  privateKeyPath: () => true,
-  handle: () => true,
-  password: () => true,
-  email: () => true,
-};
 
 program
   .name('polypod')
@@ -33,25 +22,16 @@ program
 // --- Configuration
 const configCmd = program.command('config');
 configCmd
-  .command('create')
-  .description('create a configuration file')
-  .action(async () => {
-    // resolve config path, either the option or the default
-    // generate defaults (options to override?)
-    // save
-    console.warn(`CREATE`);
-  })
-;
-configCmd
   .command('set')
   .description('set a configuration value')
   .argument('<key>', 'the configuration key')
   .argument('<value>', 'the configuration value')
   .action(async (key, value, opt) => {
-    // resolve config path, either the option or the default
-    // load the config
-    // set the value
-    // save
+    const c = await loadConfig();
+    const errors = findErrorsInKey(key, value);
+    if (errors) reportErrors(`Cannot set configuration value`, errors);
+    c[key] = value;
+    await saveConfig(c);
     console.warn(`SET ${key}=${value} (${JSON.stringify(opt)}) (${JSON.stringify(program.opts())})`);
   })
 ;
@@ -59,19 +39,31 @@ configCmd
   .command('get')
   .description('get a configuration value')
   .argument('<key>', 'the configuration key')
-  .action(async (key, opt) => {
-    // resolve config path, either the option or the default
-    // load the config
-    // get the value and output the value
-    console.warn(`GET ${key} (${JSON.stringify(opt)}) (${JSON.stringify(program.opts())})`);
+  .action(async (key) => {
+    if (!configurationKeys.has(key)) die(`Unknown configuration key "${key}".`);
+    const c = await loadConfig();
+    console.log(`${key} = ${c[key]}`);
   })
 ;
 configCmd
   .action(async (opt) => {
-    // resolve config path, either the option or the default
-    // load the config
-    // print it all out, human readable
+    const c = await loadConfig();
+    [...configurationKeys].sort((a, b) => a.localeCompare(b)).forEach(k => {
+      console.log(`• ${k} = ${c[k]}`);
+    });
     console.warn(`ALL THE VALUES  (${JSON.stringify(opt)}) (${JSON.stringify(program.opts())})`);
+  })
+;
+
+// --- Identity
+configCmd
+  .command('create')
+  .description('create an identity')
+  .action(async () => {
+    // resolve path, apply handle, etc.
+    // generate default config with options to override
+    // save
+    console.warn(`CREATE`);
   })
 ;
 
@@ -93,6 +85,8 @@ async function loadConfig () {
     return await loadJSON(pth);
   }
   catch (err) {
+    // NOTE: for the time being there is no polypod config create because it's single-user so users and
+    // config are conflated. That will change, though.
     if (hadSetConfigPath()) die(`Can't load "${pth}", did you run 'polypod -c "${pth}" config create'?`);
     die(`Can't load default configuration, did you run 'polypod config create'?`);
   }
@@ -105,6 +99,9 @@ async function saveConfig (data) {
   return await saveJSON(pth, data);
 }
 
+function reportErrors (msg, errors) {
+  die(`${msg}:\n${errors.map(e => `  • ${e}`).join('\n')}`);
+}
 function die (msg) {
   console.error(msg);
   exit(1);
