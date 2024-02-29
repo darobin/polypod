@@ -59,10 +59,14 @@ configCmd
 configCmd
   .command('create')
   .description('create an identity')
-  .action(async () => {
-    // resolve path, apply handle, etc.
+  .argument('<path>', 'the directory to store the identity in (gets created, has to be empty)')
+  .argument('<handle>', 'the ATProto handle')
+  .argument('<pds>', 'the PDS server URL')
+  .action(async (path, handle, pds) => {
+    // resolve path
     // generate default config with options to override
-    // save
+    // generate the identity
+    // save the configuration there
     console.warn(`CREATE`);
   })
 ;

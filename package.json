@@ -39,9 +39,12 @@
   },
   "dependencies": {
     "@atproto/api": "^0.7.0",
+    "@atproto/common": "^0.3.3",
+    "@atproto/crypto": "^0.3.0",
     "@atproto/identity": "^0.2.1",
-    "@atproto/syntax": "^0.1.2",
+    "@atproto/syntax": "^0.1.5",
     "@atproto/xrpc-server": "^0.3.2",
+    "@did-plc/lib": "^0.0.4",
     "acebase": "^1.29.5",
     "basic-auth": "^2.0.1",
     "blake3-multihash": "^0.0.4",
@@ -53,11 +56,12 @@
     "express-jwt": "^8.4.1",
     "get-port": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
+    "key-encoder": "^2.0.3",
     "multiformats": "^12.1.1",
     "nanoid": "^5.0.1",
     "pino": "^8.15.6",
     "pino-http": "^8.5.0",
-    "uint8arrays": "^5.0.0",
+    "uint8arrays": "^5.0.2",
     "wnfs": "^0.1.27"
   }
 }
