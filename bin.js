@@ -7,7 +7,8 @@ import { program } from 'commander';
 import makeRel from './lib/rel.js';
 import loadJSON from './lib/load-json.js';
 import saveJSON from './lib/save-json.js';
-import { configurationKeys, findErrorsInKey } from "./lib/config.js";
+import { configurationKeys, findErrorsInKey, defaultConfiguration } from "./lib/config.js";
+import { createUser } from "./lib/identity.js";
 
 const rel = makeRel(import.meta.url);
 const { version } = await loadJSON(rel('./package.json'));
@@ -56,26 +57,34 @@ configCmd
 ;
 
 // --- Identity
-configCmd
+program
   .command('create')
   .description('create an identity')
   .argument('<path>', 'the directory to store the identity in (gets created, has to be empty)')
   .argument('<handle>', 'the ATProto handle')
   .argument('<pds>', 'the PDS server URL')
-  .action(async (path, handle, pds) => {
-    // resolve path
-    // generate default config with options to override
-    // generate the identity
-    // save the configuration there
-    console.warn(`CREATE`);
+  .action(async (path, handle, pdsServer) => {
+    const directory = absPath(path);
+    const conf = defaultConfiguration();
+    const { did, privKeyPath } = await createUser({ handle, directory, pdsServer }, conf);
+    const configPath = join(directory, 'config.json');
+    await saveConfig(conf, configPath);
+    console.log(`Identity created in "${directory}"`);
+    console.log(`  • DID "${did}"`);
+    console.log(`  • key "${configPath}"`);
+    console.log(`  • configuration "${configPath}"`);
   })
 ;
 
 program.parse(argv);
 
+function absPath (pth) {
+  return isAbsolute(pth) ? pth : join(cwd(), pth);
+}
+
 function resolveConfigPath () {
   const { config } = program.opts();
-  if (config) return isAbsolute(config) ? config : join(cwd(), config);
+  if (config) return absPath(config);
   return join(homedir(), '.polypod/config.json');
 }
 
@@ -96,8 +105,8 @@ async function loadConfig () {
   }
 }
 
-async function saveConfig (data) {
-  const pth = resolveConfigPath();
+async function saveConfig (data, path) {
+  const pth = path || resolveConfigPath();
   const dir = dirname(pth);
   await mkdir(dir, { recursive: true });
   return await saveJSON(pth, data);
